@@ -33,7 +33,7 @@ const events: React.Reducer<EventState[], EventAction> = (state: EventState[], a
     case ActionType.DELETE_EVENT:
       return state.filter(event => event.id !== action.payload.id )
     case ActionType.DELETE_ALL_EVENT:
-      return state
+      return []
     default:
       return state
   }
