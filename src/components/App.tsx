@@ -1,5 +1,6 @@
 import React, { useReducer, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Event from './Event'
 import reducer, {EventState, EventAction, ActionType} from '../reducers/'
 
 const App: React.FC = () =>  {
@@ -55,6 +56,7 @@ const App: React.FC = () =>  {
           </tr>
         </thead>
         <tbody>
+          {state.map((event, index) => (<Event key={index} event={event} dispatch={dispatch} />))}
         </tbody>
       </table>
     </div>

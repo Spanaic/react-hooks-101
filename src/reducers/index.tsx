@@ -31,7 +31,7 @@ const events: React.Reducer<EventState[], EventAction> = (state: EventState[], a
       // 波括弧をスプレッド演算子で展開したときのスコープを考える
       return [...state, { id: id, ...event }]
     case ActionType.DELETE_EVENT:
-      return state
+      return state.filter(event => event.id !== action.payload.id )
     case ActionType.DELETE_ALL_EVENT:
       return state
     default:
