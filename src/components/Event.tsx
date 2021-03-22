@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { DELETE_EVENT } from '../actions'
+
 // FIXME: コンポーネントの引数がanyなので修正が必要
 const Event = ({event, dispatch}) => {
   const id = event.id
@@ -9,7 +11,8 @@ const Event = ({event, dispatch}) => {
       dispatch(
         {
           // こちらはAppコンポーネントと違い、文字列で渡すと動作する
-          type: 'DELETE_EVENT',
+          // type: 'DELETE_EVENT',
+          type: DELETE_EVENT,
           // type: ActionType.DELETE_EVENT,
           payload: {
             id: id,
