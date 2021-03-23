@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import EventForm from './EventForm'
 import Events from './Events'
+import AppContext from '../contexts/AppContext'
 import reducer, {EventState, EventAction} from '../reducers/'
 
 const App: React.FC = () =>  {
@@ -10,10 +11,12 @@ const App: React.FC = () =>  {
   const [state, dispatch] = useReducer<React.Reducer<EventState[], EventAction>>(reducer, [])
 
   return (
-    <div className="container-fluid">
-      <EventForm state={state} dispatch={dispatch} />
-      <Events state={state} dispatch={dispatch} />
-    </div>
+    <AppContext.Provider value={'Hello, Iam a Provider'}>
+      <div className="container-fluid">
+        <EventForm state={state} dispatch={dispatch} />
+        <Events state={state} dispatch={dispatch} />
+      </div>
+    </AppContext.Provider>
   );
 }
 
