@@ -1,6 +1,17 @@
 import { createContext } from 'react';
+import { EventState, EventAction } from '../reducers'
 
-const AppContext = createContext('')
+// context用にstateとdispatchをまとめる
+  // stateの最終的な型を定義することでエラーが解決した（EventStateの配列をstateプロパティに渡すことで解決）
+export type EventStateWithAction = {
+  state: EventState[];
+  dispatch: React.Dispatch<EventAction>;
+}
+
+// 引数を入れないとTSからエラーで怒られるので注意
+  // https://qiita.com/_akira19/items/8911567227ce38a1bdf6
+    // stateが配列なので型定義が難しい
+const AppContext = createContext({} as EventStateWithAction)
 
 export default AppContext;
 // provider(提供者)でトップレベルからコンポーネントをラップする

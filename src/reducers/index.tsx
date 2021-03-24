@@ -22,6 +22,7 @@ export type EventAction = {
 }
 
 
+// const events: React.Reducer<EventState[], EventAction> = (state: EventState[], action: EventAction) => {
 const events: React.Reducer<EventState[], EventAction> = (state: EventState[], action: EventAction) => {
   switch(action.type) {
     case ActionType.CREATE_EVENT:

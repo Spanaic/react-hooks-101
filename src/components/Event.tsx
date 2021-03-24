@@ -1,9 +1,12 @@
-import React from 'react'
+import React,  { useContext } from 'react'
 
-import { DELETE_EVENT } from '../actions'
+// import { DELETE_EVENT } from '../actions'
+import { ActionType } from '../reducers'
+import AppContext from '../contexts/AppContext'
 
 // FIXME: コンポーネントの引数がanyなので修正が必要
-const Event = ({event, dispatch}) => {
+const Event = ({event}) => {
+  const { dispatch } = useContext(AppContext)
   const id = event.id
   const handleClickDeleteButton = () => {
     const result = window.confirm(`イベント(id=${id})を本当に削除しても良いですか？`)
@@ -12,7 +15,7 @@ const Event = ({event, dispatch}) => {
         {
           // こちらはAppコンポーネントと違い、文字列で渡すと動作する
           // type: 'DELETE_EVENT',
-          type: DELETE_EVENT,
+          type: ActionType.DELETE_EVENT,
           // type: ActionType.DELETE_EVENT,
           payload: {
             id: id,

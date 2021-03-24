@@ -7,14 +7,17 @@ import AppContext from '../contexts/AppContext'
 import reducer, {EventState, EventAction} from '../reducers/'
 
 const App: React.FC = () =>  {
-  // NOTE: EventFormコンポーネントに切り分けてリファクタ
   const [state, dispatch] = useReducer<React.Reducer<EventState[], EventAction>>(reducer, [])
 
   return (
-    <AppContext.Provider value={'Hello, Iam a Provider'}>
+    // stateとdispatchをproviderのvalueに設定する
+    <AppContext.Provider value={{ state, dispatch }}>
       <div className="container-fluid">
-        <EventForm state={state} dispatch={dispatch} />
-        <Events state={state} dispatch={dispatch} />
+        {/* <EventForm state={state} dispatch={dispatch} />
+        <Events state={state} dispatch={dispatch} /> */}
+        {/* useContextを使うため、propsにstateとdispatchを渡す必要がなくなる */}
+        <EventForm />
+        <Events />
       </div>
     </AppContext.Provider>
   );

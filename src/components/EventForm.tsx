@@ -1,17 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { ActionType } from '../reducers'
+import AppContext from '../contexts/AppContext'
 
-const EventForm = ({ state, dispatch }) => {
+const EventForm = () => {
   // Appコンポーネントから渡ってくるstateとdispatchを利用するためuseReducerをこのファイルでは使わない
     // オブジェクトが独立してしまうため、AppとEventFormで使うstateとdispatchを共有するためにpropsで渡ってきた値(関数)を使う
   // useReducerを使う際の定型文
   // const [state, dispatch] = useReducer<React.Reducer<EventState[], EventAction>>(reducer, [])
   const [title, setTitle] = useState('')
   const [body, setBody] = useState('')
+  const {state, dispatch} = useContext(AppContext)
 
   function addEvent(e: React.MouseEvent<HTMLElement, MouseEvent>) {
     e.preventDefault();
-    console.log({title, body})
     dispatch({
       type: ActionType.CREATE_EVENT,
       payload:
