@@ -1,13 +1,22 @@
-import React, { useReducer, useState } from 'react';
+import React, { useReducer } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import EventForm from './EventForm'
 import Events from './Events'
 import AppContext from '../contexts/AppContext'
-import reducer, {EventState, EventAction} from '../reducers/'
+import eventsReducer, {EventState, EventAction, EventStates} from '../reducers/events'
+
+type initialStateType = {
+  events: EventState[]
+}
 
 const App: React.FC = () =>  {
-  const [state, dispatch] = useReducer<React.Reducer<EventState[], EventAction>>(reducer, [])
+  const initialState: initialStateType = {
+    events: []
+  }
+
+  // トップレベルコンポーネントでreducersの初期化をしている
+  const [state, dispatch] = useReducer<React.Reducer<EventStates, EventAction>>(eventsReducer, initialState)
 
   return (
     // stateとdispatchをproviderのvalueに設定する
@@ -24,6 +33,3 @@ const App: React.FC = () =>  {
 }
 
 export default App;
-function userState(arg0: string): [any, any] {
-  throw new Error('Function not implemented.');
-}

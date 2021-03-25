@@ -1,7 +1,7 @@
-import React,  { useContext } from 'react'
+import { useContext } from 'react'
 
 // import { DELETE_EVENT } from '../actions'
-import { ActionType } from '../reducers'
+import { ActionType } from '../reducers/events'
 import AppContext from '../contexts/AppContext'
 
 // FIXME: コンポーネントの引数がanyなので修正が必要
@@ -13,10 +13,7 @@ const Event = ({event}) => {
     if (result) {
       dispatch(
         {
-          // こちらはAppコンポーネントと違い、文字列で渡すと動作する
-          // type: 'DELETE_EVENT',
           type: ActionType.DELETE_EVENT,
-          // type: ActionType.DELETE_EVENT,
           payload: {
             id: id,
             title: event.title,

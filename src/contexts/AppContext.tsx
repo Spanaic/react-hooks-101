@@ -1,10 +1,10 @@
 import { createContext } from 'react';
-import { EventState, EventAction } from '../reducers'
+import { EventAction, EventStates } from '../reducers/events'
 
 // context用にstateとdispatchをまとめる
   // stateの最終的な型を定義することでエラーが解決した（EventStateの配列をstateプロパティに渡すことで解決）
 export type EventStateWithAction = {
-  state: EventState[];
+  state: EventStates;
   dispatch: React.Dispatch<EventAction>;
 }
 

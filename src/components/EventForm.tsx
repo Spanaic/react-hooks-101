@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { ActionType } from '../reducers'
+import { ActionType } from '../reducers/events'
 import AppContext from '../contexts/AppContext'
 
 const EventForm = () => {
@@ -60,7 +60,7 @@ const EventForm = () => {
         </div>
 
         <button className="btn btn-primary" onClick={addEvent} disabled={unCreatable} >イベントを作成する</button>
-        <button className="btn btn-danger" onClick={deleteAllEvents} disabled={state.length === 0} >全てのイベントを削除する</button>
+        <button className="btn btn-danger" onClick={deleteAllEvents} disabled={state.events.length === 0} >全てのイベントを削除する</button>
       </form>
     </>
   )
