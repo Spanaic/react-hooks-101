@@ -5,14 +5,19 @@ import EventForm from './EventForm'
 import Events from './Events'
 import AppContext from '../contexts/AppContext'
 import eventsReducer, {EventState, EventAction, EventStates} from '../reducers/events'
+import operationLogs, { operationLogState } from '../reducers/operationLogs';
 
 type initialStateType = {
   events: EventState[]
+  operationLogs: operationLogState[]
 }
 
 const App: React.FC = () =>  {
+
   const initialState: initialStateType = {
-    events: []
+    events: [],
+    // operationLogsの初期値も設定する
+    operationLogs: []
   }
 
   // トップレベルコンポーネントでreducersの初期化をしている
