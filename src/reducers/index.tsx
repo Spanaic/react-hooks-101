@@ -2,7 +2,9 @@ import { combineReducers } from 'redux'
 import eventsReducer from './events'
 import operationLogs from './operationLogs';
 
-export default combineReducers({
+const rootReducers = combineReducers({
   eventsReducer,
   operationLogs
-});
+})
+
+export default rootReducers;

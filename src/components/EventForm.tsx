@@ -1,5 +1,7 @@
 import React, { useState, useContext } from 'react'
-import { ActionType } from '../reducers/events'
+import { ActionType, EventStates } from '../reducers/events'
+import { operationLogActionType } from '../reducers/operationLogs'
+import { timeCurrentIso8601 } from '../utils'
 import AppContext from '../contexts/AppContext'
 
 const EventForm = () => {
@@ -24,6 +26,14 @@ const EventForm = () => {
       }
     )
 
+    dispatch({
+      type: operationLogActionType.ADD_OPERATION_LOG,
+      payload: {
+        description: 'イベントを作成しました。',
+        operatedAt: timeCurrentIso8601()
+      }
+    })
+
     setTitle('')
     setBody('')
   }
@@ -45,6 +55,17 @@ const EventForm = () => {
   // disabledボタンを制御するための真偽値を挿入する
   const unCreatable =  title === '' || body === ''
 
+  const unDeletableAll: () => boolean = () => {
+    if ('events' in state) {
+      if (state.events.length === 0) {
+        return true
+      } else {
+        return false
+      }
+    } else {
+      return false
+    }
+  }
 
   return (
     <>
@@ -60,7 +81,7 @@ const EventForm = () => {
         </div>
 
         <button className="btn btn-primary" onClick={addEvent} disabled={unCreatable} >イベントを作成する</button>
-        <button className="btn btn-danger" onClick={deleteAllEvents} disabled={state.events.length === 0} >全てのイベントを削除する</button>
+        <button className="btn btn-danger" onClick={deleteAllEvents} disabled={unDeletableAll} >全てのイベントを削除する</button>
       </form>
     </>
   )

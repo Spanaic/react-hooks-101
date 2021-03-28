@@ -5,7 +5,8 @@ import EventForm from './EventForm'
 import Events from './Events'
 import AppContext from '../contexts/AppContext'
 import eventsReducer, {EventState, EventAction, EventStates} from '../reducers/events'
-import operationLogs, { operationLogState } from '../reducers/operationLogs';
+import operationLogs, { operationLogState, operationLogAction, operationLogStates } from '../reducers/operationLogs';
+import rootReducers from '../reducers/operationLogs'
 
 type initialStateType = {
   events: EventState[]
@@ -21,7 +22,9 @@ const App: React.FC = () =>  {
   }
 
   // トップレベルコンポーネントでreducersの初期化をしている
-  const [state, dispatch] = useReducer<React.Reducer<EventStates, EventAction>>(eventsReducer, initialState)
+  const [state, dispatch]: [any, React.DispatchWithoutAction] = useReducer(rootReducers, initialState)
+  // const [state, dispatch] = useReducer<React.Reducer<EventStates | operationLogStates, EventAction | operationLogAction>>(rootReducers, initialState)
+  // const [state, dispatch] = useReducer<React.Reducer<EventStates, EventAction | operationLogAction>>(eventsReducer, initialState)
 
   return (
     // stateとdispatchをproviderのvalueに設定する
