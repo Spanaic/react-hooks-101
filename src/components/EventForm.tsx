@@ -43,11 +43,20 @@ const EventForm = () => {
     e.preventDefault()
     const result = window.confirm('全てのイベントを本当に削除しても良いですか？')
     if (result) {
-      eventDispatch({ type: ActionType.DELETE_ALL_EVENT,
+      eventDispatch({
+        type: ActionType.DELETE_ALL_EVENT,
         payload: {
           id: e.target.id,
           title: e.target.title,
           body: e.target.body
+        }
+      })
+
+      operationLogDispatch({
+        type: OperationLogActionType.DELETE_ALL_OPERATION_LOGS,
+        payload:{
+          description: '全てのイベントを削除しました。',
+          operatedAt: timeCurrentIso8601()
         }
       })
     }
