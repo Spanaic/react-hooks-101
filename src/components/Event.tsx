@@ -2,16 +2,17 @@ import { useContext } from 'react'
 
 // import { DELETE_EVENT } from '../actions'
 import { ActionType } from '../reducers/events'
-import AppContext from '../contexts/AppContext'
+// import AppContext from '../contexts/AppContext'
+import { EventContext } from '../contexts/AppContext'
 
 // FIXME: コンポーネントの引数がanyなので修正が必要
 const Event = ({event}) => {
-  const { dispatch } = useContext(AppContext)
+  const { eventDispatch } = useContext(EventContext)
   const id = event.id
   const handleClickDeleteButton = () => {
     const result = window.confirm(`イベント(id=${id})を本当に削除しても良いですか？`)
     if (result) {
-      dispatch(
+      eventDispatch(
         {
           type: ActionType.DELETE_EVENT,
           payload: {

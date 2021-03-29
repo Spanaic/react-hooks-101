@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react'
 import { ActionType, EventStates } from '../reducers/events'
-import { operationLogActionType } from '../reducers/operationLogs'
+import { OperationLogActionType } from '../reducers/operationLogs'
 import { timeCurrentIso8601 } from '../utils'
-import AppContext from '../contexts/AppContext'
+import { EventContext, OperationLogContext } from '../contexts/AppContext'
 
 const EventForm = () => {
   // Appコンポーネントから渡ってくるstateとdispatchを利用するためuseReducerをこのファイルでは使わない
@@ -11,11 +11,12 @@ const EventForm = () => {
   // const [state, dispatch] = useReducer<React.Reducer<EventState[], EventAction>>(reducer, [])
   const [title, setTitle] = useState('')
   const [body, setBody] = useState('')
-  const {state, dispatch} = useContext(AppContext)
+  const { eventState, eventDispatch } = useContext(EventContext)
+  const { operationLogState, operationLogDispatch } = useContext(OperationLogContext)
 
   function addEvent(e: React.MouseEvent<HTMLElement, MouseEvent>) {
     e.preventDefault();
-    dispatch({
+    eventDispatch({
       type: ActionType.CREATE_EVENT,
       payload:
         {
@@ -26,8 +27,8 @@ const EventForm = () => {
       }
     )
 
-    dispatch({
-      type: operationLogActionType.ADD_OPERATION_LOG,
+    operationLogDispatch({
+      type: OperationLogActionType.ADD_OPERATION_LOG,
       payload: {
         description: 'イベントを作成しました。',
         operatedAt: timeCurrentIso8601()
@@ -42,7 +43,7 @@ const EventForm = () => {
     e.preventDefault()
     const result = window.confirm('全てのイベントを本当に削除しても良いですか？')
     if (result) {
-      dispatch({ type: ActionType.DELETE_ALL_EVENT,
+      eventDispatch({ type: ActionType.DELETE_ALL_EVENT,
         payload: {
           id: e.target.id,
           title: e.target.title,
@@ -55,17 +56,17 @@ const EventForm = () => {
   // disabledボタンを制御するための真偽値を挿入する
   const unCreatable =  title === '' || body === ''
 
-  const unDeletableAll: () => boolean = () => {
-    if ('events' in state) {
-      if (state.events.length === 0) {
-        return true
-      } else {
-        return false
-      }
-    } else {
-      return false
-    }
-  }
+  // const unDeletableAll: () => boolean = () => {
+  //   if ('events' in state) {
+  //     if (state.events.length === 0) {
+  //       return true
+  //     } else {
+  //       return false
+  //     }
+  //   } else {
+  //     return false
+  //   }
+  // }
 
   return (
     <>
@@ -81,7 +82,8 @@ const EventForm = () => {
         </div>
 
         <button className="btn btn-primary" onClick={addEvent} disabled={unCreatable} >イベントを作成する</button>
-        <button className="btn btn-danger" onClick={deleteAllEvents} disabled={unDeletableAll} >全てのイベントを削除する</button>
+        {/* <button className="btn btn-danger" onClick={deleteAllEvents} disabled={unDeletableAll} >全てのイベントを削除する</button> */}
+        <button className="btn btn-danger" onClick={deleteAllEvents} disabled={eventState.events.length === 0} >全てのイベントを削除する</button>
       </form>
     </>
   )

@@ -3,28 +3,28 @@ import {
   DELETE_ALL_OPERATION_LOGS,
 } from '../actions';
 
-export type operationLogState = {
+export type OperationLogState = {
   description: string;
   operatedAt: string;
 }
 
-// export enum operationLogActionType {
-export enum operationLogActionType {
+// export enum OperationLogActionType {
+export enum OperationLogActionType {
   ADD_OPERATION_LOG = 'ADD_OPERATION_LOG',
   DELETE_ALL_OPERATION_LOGS = 'DELETE_ALL_OPERATION_LOGS'
 }
 
-export type operationLogAction = {
-  type: operationLogActionType;
-  payload: operationLogState
+export type OperationLogAction = {
+  type: OperationLogActionType;
+  payload: OperationLogState
 }
 
-export type operationLogStates = {
-  operationLogs: operationLogState[]
+export type OperationLogStates = {
+  operationLogs: OperationLogState[]
   // events: []
 }
 
-const operationLogs: any = (state:operationLogStates, action: operationLogAction) => {
+const operationLogs: any = (state:OperationLogStates, action: OperationLogAction) => {
   switch(action.type) {
     case ADD_OPERATION_LOG:
       const operationLog = {
@@ -39,7 +39,7 @@ const operationLogs: any = (state:operationLogStates, action: operationLogAction
       return state.operationLogs
   }
 }
-// const operationLogs = (state:operationLogState[] = [], action: operationLogAction) => {
+// const operationLogs = (state:OperationLogState[] = [], action: OperationLogAction) => {
 //   switch(action.type) {
 //     case ADD_OPERATION_LOG:
 //       const operationLog = {
