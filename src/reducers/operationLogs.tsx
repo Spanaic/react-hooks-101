@@ -15,11 +15,11 @@ export enum OperationLogActionType {
 
 export type OperationLogAction = {
   type: OperationLogActionType;
-  payload: OperationLogState
+  payload: OperationLogState;
 }
 
 export type OperationLogStates = {
-  operationLogs: OperationLogState[]
+  operationLogs: OperationLogState[];
 }
 
 const operationLogs: any = (state: OperationLogStates, action: OperationLogAction) => {
