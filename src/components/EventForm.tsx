@@ -12,7 +12,7 @@ const EventForm = () => {
   const [title, setTitle] = useState('')
   const [body, setBody] = useState('')
   const { eventState, eventDispatch } = useContext(EventContext)
-  const { operationLogDispatch } = useContext(OperationLogContext)
+  const {operationLogState, operationLogDispatch } = useContext(OperationLogContext)
 
   function addEvent(e: React.MouseEvent<HTMLElement, MouseEvent>) {
     e.preventDefault();
@@ -53,10 +53,24 @@ const EventForm = () => {
       })
 
       operationLogDispatch({
-        type: OperationLogActionType.DELETE_ALL_OPERATION_LOGS,
+        type: OperationLogActionType.ADD_OPERATION_LOG,
         payload:{
           description: '全てのイベントを削除しました。',
           operatedAt: timeCurrentIso8601()
+        }
+      })
+    }
+  }
+
+  const deleteAllOperationLogs = e => {
+    e.preventDefault()
+    const result = window.confirm('全ての操作ログを本当に削除しても良いですか?')
+    if (result) {
+      operationLogDispatch({
+        type: OperationLogActionType.DELETE_ALL_OPERATION_LOGS,
+        payload: {
+          description: '',
+          operatedAt: ''
         }
       })
     }
@@ -80,6 +94,7 @@ const EventForm = () => {
 
         <button className="btn btn-primary" onClick={addEvent} disabled={unCreatable} >イベントを作成する</button>
         <button className="btn btn-danger" onClick={deleteAllEvents} disabled={eventState.events.length === 0} >全てのイベントを削除する</button>
+        <button className="btn btn-danger" onClick={deleteAllOperationLogs} disabled={operationLogState.operationLogs.length === 0} >全ての操作ログを削除する</button>
       </form>
     </>
   )

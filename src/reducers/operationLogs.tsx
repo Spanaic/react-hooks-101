@@ -32,7 +32,7 @@ const operationLogs: any = (state: OperationLogStates, action: OperationLogActio
       // 操作ログは新しく操作したログが常に上に表示されて欲しいので, prevStateの前に挿入する。
       return { operationLogs: [operationLog, ...state.operationLogs] }
     case DELETE_ALL_OPERATION_LOGS:
-      return { operationLogs: [operationLog, ...state.operationLogs] }
+      return { operationLogs: [] }
     default:
       return state.operationLogs
   }
