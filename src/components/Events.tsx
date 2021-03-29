@@ -1,6 +1,5 @@
 import { useContext } from 'react'
 import Event from './Event'
-// import AppContext from '../contexts/AppContext';
 import { EventContext } from '../contexts/AppContext';
 
 const Events = () => {

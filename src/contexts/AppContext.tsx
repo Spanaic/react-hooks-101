@@ -13,11 +13,6 @@ export type OperationLogStateWithAction = {
   operationLogDispatch: React.Dispatch<OperationLogAction>
 }
 
-// export type CombineStateWithAction = {
-//   state: EventStates | OperationLogStates;
-//   dispatch: React.Dispatch<EventAction | OperationLogAction >
-// }
-
 // NOTE: contextを分割して、一つのprovideにまとめる方法を取る
   // 無理にcombineReducerでreducerをまとめようとしない
     // https://qiita.com/jonakp/items/58c9c383473d02479ea7
@@ -65,16 +60,3 @@ const AppProvider = (props: { children: React.ReactNode }) => {
 }
 
 export default AppProvider;
-
-// 引数を入れないとTSからエラーで怒られるので注意
-  // https://qiita.com/_akira19/items/8911567227ce38a1bdf6
-    // stateが配列なので型定義が難しい
-// const AppContext = createContext({} as EventStateWithAction)
-// const AppContext = createContext({} as CombineStateWithAction)
-
-// export default AppContext;
-// provider(提供者)でトップレベルからコンポーネントをラップする
-  // 全てのコンポーネントにcontextを提供可能にするため
-// 受け取る側はconsumerコンポーネントを使う
-  // providerにラップされていればどこでも使うことが出来る
-    // consumerを使うvalueの受け取り方は古い記述。今はuseContextを使う

@@ -1,10 +1,3 @@
-// 自分が最初に定義した型(間違い)
-// type actionType = {
-//   // type: 'CREATE_EVENT' | 'DELETE_EVENT' | 'DELETE_ALL_EVENT';
-//   title: string;
-//   body: Text;
-// }
-
 export type EventState = {
   id: number;
   title: string;
@@ -39,7 +32,6 @@ const eventsReducer: any = (state: EventStates, action: EventAction) => {
       return { events: state.events.filter(event => event.id !== action.payload.id ) }
     case ActionType.DELETE_ALL_EVENT:
       return { events: [] }
-      // return []
     default:
       return state.events
   }

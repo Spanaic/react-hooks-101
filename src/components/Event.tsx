@@ -1,8 +1,6 @@
 import { useContext } from 'react'
 
-// import { DELETE_EVENT } from '../actions'
 import { ActionType } from '../reducers/events'
-// import AppContext from '../contexts/AppContext'
 import { EventContext } from '../contexts/AppContext'
 
 // FIXME: コンポーネントの引数がanyなので修正が必要

@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { ActionType, EventStates } from '../reducers/events'
+import { ActionType} from '../reducers/events'
 import { OperationLogActionType } from '../reducers/operationLogs'
 import { timeCurrentIso8601 } from '../utils'
 import { EventContext, OperationLogContext } from '../contexts/AppContext'
@@ -12,7 +12,7 @@ const EventForm = () => {
   const [title, setTitle] = useState('')
   const [body, setBody] = useState('')
   const { eventState, eventDispatch } = useContext(EventContext)
-  const { operationLogState, operationLogDispatch } = useContext(OperationLogContext)
+  const { operationLogDispatch } = useContext(OperationLogContext)
 
   function addEvent(e: React.MouseEvent<HTMLElement, MouseEvent>) {
     e.preventDefault();
@@ -56,18 +56,6 @@ const EventForm = () => {
   // disabledボタンを制御するための真偽値を挿入する
   const unCreatable =  title === '' || body === ''
 
-  // const unDeletableAll: () => boolean = () => {
-  //   if ('events' in state) {
-  //     if (state.events.length === 0) {
-  //       return true
-  //     } else {
-  //       return false
-  //     }
-  //   } else {
-  //     return false
-  //   }
-  // }
-
   return (
     <>
       <h4>イベント作成フォーム</h4>
@@ -82,7 +70,6 @@ const EventForm = () => {
         </div>
 
         <button className="btn btn-primary" onClick={addEvent} disabled={unCreatable} >イベントを作成する</button>
-        {/* <button className="btn btn-danger" onClick={deleteAllEvents} disabled={unDeletableAll} >全てのイベントを削除する</button> */}
         <button className="btn btn-danger" onClick={deleteAllEvents} disabled={eventState.events.length === 0} >全てのイベントを削除する</button>
       </form>
     </>

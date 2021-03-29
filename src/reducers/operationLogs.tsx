@@ -8,7 +8,6 @@ export type OperationLogState = {
   operatedAt: string;
 }
 
-// export enum OperationLogActionType {
 export enum OperationLogActionType {
   ADD_OPERATION_LOG = 'ADD_OPERATION_LOG',
   DELETE_ALL_OPERATION_LOGS = 'DELETE_ALL_OPERATION_LOGS'
@@ -21,7 +20,6 @@ export type OperationLogAction = {
 
 export type OperationLogStates = {
   operationLogs: OperationLogState[]
-  // events: []
 }
 
 const operationLogs: any = (state:OperationLogStates, action: OperationLogAction) => {
@@ -39,20 +37,5 @@ const operationLogs: any = (state:OperationLogStates, action: OperationLogAction
       return state.operationLogs
   }
 }
-// const operationLogs = (state:OperationLogState[] = [], action: OperationLogAction) => {
-//   switch(action.type) {
-//     case ADD_OPERATION_LOG:
-//       const operationLog = {
-//         description: action.payload.description,
-//         operatedAt: action.payload.operatedAt
-//       }
-//       // 操作ログは新しく操作したログが常に上に表示されて欲しいので, prevStateの前に挿入する。
-//       return [operationLog, ...state]
-//     case DELETE_ALL_OPERATION_LOGS:
-//       return []
-//     default:
-//       return state
-//   }
-// }
 
 export default operationLogs;
