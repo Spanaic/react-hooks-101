@@ -8,7 +8,7 @@ import { timeCurrentIso8601 } from '../utils'
 // FIXME: コンポーネントの引数がanyなので修正が必要
 const Event = ({event}) => {
   const { eventDispatch } = useContext(EventContext)
-  const { operationLogState, operationLogDispatch } = useContext(OperationLogContext)
+  const { operationLogDispatch } = useContext(OperationLogContext)
   const id = event.id
   const handleClickDeleteButton = () => {
     const result = window.confirm(`イベント(id=${id})を本当に削除しても良いですか？`)

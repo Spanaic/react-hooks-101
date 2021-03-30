@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import EventForm from './EventForm'
 import Events from './Events'
+import OperationLogs from './OperationLogs'
 import AppProvider from '../contexts/AppContext'
 
 const App: React.FC = () =>  {
@@ -18,6 +19,7 @@ const App: React.FC = () =>  {
         {/* NOTE:useContextを使うため、propsにstateとdispatchを渡す必要がなくなる */}
         <EventForm />
         <Events />
+        <OperationLogs />
       </div>
     </AppProvider>
   );
